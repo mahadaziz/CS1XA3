@@ -57,9 +57,23 @@ function submitMorePpl(event) {
    ********************************************************************************************
    */
 
+function acceptResponse(data,status) {
+    if (status == 'success') {
+        location.reload();
+    }
+    else {
+        alert('failed to accept/decline friend request ' + status);
+    }
+}
+
 function acceptDeclineRequest(event) {
     // TODO Objective 6: perform AJAX POST to accept or decline Friend Request
-    alert('Accept/Decline Button Pressed');
+    let frID = this.id;
+    let json_data = { 'frID' : frID };
+    let url_path = accept_decline_url;
+    $.post(url_path,
+           json_data,
+           acceptResponse);
 }
 
 /* ********************************************************************************************
